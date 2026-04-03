@@ -1,1029 +1,879 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Omar Ahmed — Front-End Developer & Graphic Designer</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>عمر أحمد | مطور مواقع</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --bg: #0a0a0f;
-    --bg2: #111118;
-    --bg3: #1a1a24;
-    --accent: #4f6ef7;
-    --accent2: #a78bfa;
-    --text: #f0f0f5;
-    --muted: #888899;
+    --primary: #ff3c00;
+    --primary-dim: rgba(255,60,0,0.12);
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --text: #f0f0f0;
+    --text-dim: #888;
     --border: rgba(255,255,255,0.07);
-    --card: rgba(255,255,255,0.04);
-    --font-display: 'Syne', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
+    --card-bg: #131313;
   }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
 
   body {
+    font-family: 'Cairo', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.7;
     overflow-x: hidden;
   }
 
-  /* ── NOISE OVERLAY ── */
+  /* NOISE OVERLAY */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
-    z-index: 0;
+    z-index: 9999;
     opacity: 0.4;
   }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
+    padding: 20px 5%;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 1.2rem 4rem;
-    background: rgba(10,10,15,0.85);
+    align-items: center;
+    background: rgba(10,10,10,0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
   }
 
   .nav-logo {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.15rem;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    text-decoration: none;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
   }
 
-  .nav-logo span { color: var(--accent); }
+  .nav-logo span { color: var(--primary); }
 
-  nav ul {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
 
-  nav a {
-    color: var(--muted);
+  .nav-links a {
+    color: var(--text-dim);
     text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    font-size: 0.9rem;
+    font-weight: 600;
     transition: color 0.2s;
+    position: relative;
   }
 
-  nav a:hover { color: var(--text); }
-
-  .nav-cta {
-    background: var(--accent) !important;
-    color: #fff !important;
-    padding: 0.45rem 1.2rem;
-    border-radius: 100px;
-    font-weight: 500 !important;
-    font-size: 0.85rem !important;
-    transition: opacity 0.2s !important;
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; right: 0;
+    width: 0; height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
   }
 
-  .nav-cta:hover { opacity: 0.85; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
 
-  /* ── HERO ── */
+  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 8rem 4rem 4rem;
+    padding: 0 5%;
     position: relative;
+    overflow: hidden;
   }
 
-  .hero-glow {
+  .hero-bg {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(79,110,247,0.15) 0%, transparent 70%);
-    top: 10%;
-    right: -100px;
-    pointer-events: none;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255,60,0,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(255,60,0,0.04) 0%, transparent 60%);
   }
 
-  .hero-glow2 {
+  .hero-grid {
     position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(167,139,250,0.1) 0%, transparent 70%);
-    bottom: 20%;
-    left: -50px;
-    pointer-events: none;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
 
-  .hero-content { max-width: 780px; position: relative; z-index: 1; }
+  .hero-content { position: relative; z-index: 2; max-width: 700px; }
 
-  .hero-badge {
+  .hero-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(79,110,247,0.12);
-    border: 1px solid rgba(79,110,247,0.3);
-    color: #8ba4fa;
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.35rem 1rem;
+    gap: 8px;
+    background: var(--primary-dim);
+    border: 1px solid rgba(255,60,0,0.3);
+    padding: 6px 16px;
     border-radius: 100px;
-    margin-bottom: 2rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease forwards;
   }
 
-  .hero-badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
+  .hero-tag .dot {
+    width: 6px; height: 6px;
+    background: var(--primary);
     border-radius: 50%;
-    background: #4ade80;
     animation: pulse 2s infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
   }
 
   .hero h1 {
-    font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.1s ease both;
   }
 
-  .hero h1 .line2 {
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .hero h1 .accent { color: var(--primary); }
 
-  .hero-desc {
-    font-size: 1.1rem;
-    color: var(--muted);
-    max-width: 520px;
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-dim);
     line-height: 1.8;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
+    max-width: 520px;
+    margin-bottom: 40px;
+    animation: fadeUp 0.6s 0.2s ease both;
   }
 
-  .hero-actions {
+  .hero-btns {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
     flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
   }
 
   .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--accent);
-    color: #fff;
+    background: var(--primary);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 8px;
     text-decoration: none;
-    padding: 0.8rem 1.8rem;
-    border-radius: 100px;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 0.95rem;
-    transition: transform 0.2s, opacity 0.2s;
+    transition: all 0.25s;
+    border: 2px solid var(--primary);
   }
 
-  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--primary);
+    transform: translateY(-2px);
+  }
 
   .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
     background: transparent;
     color: var(--text);
+    padding: 14px 32px;
+    border-radius: 8px;
     text-decoration: none;
-    padding: 0.8rem 1.8rem;
-    border-radius: 100px;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 0.95rem;
-    border: 1px solid var(--border);
-    transition: border-color 0.2s, background 0.2s;
+    border: 2px solid var(--border);
+    transition: all 0.25s;
   }
 
   .btn-outline:hover {
-    border-color: rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.04);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
   }
 
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-    padding-top: 3rem;
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--bg2);
     border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
   }
+
+  .stat-item { padding: 8px; }
 
   .stat-num {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text);
-    display: block;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
   }
 
   .stat-label {
-    font-size: 0.8rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 6px;
+    font-weight: 600;
   }
 
-  /* ── SECTIONS ── */
-  section {
-    padding: 6rem 4rem;
-    position: relative;
-    z-index: 1;
-  }
+  /* SECTIONS */
+  section { padding: 90px 5%; }
 
-  .section-tag {
+  .section-header { margin-bottom: 56px; }
+
+  .section-label {
     font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--accent);
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 3px;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 0.75rem;
+    margin-bottom: 12px;
   }
 
   .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 1rem;
+    font-family: 'Tajawal', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.2;
   }
 
-  .section-sub {
-    color: var(--muted);
-    font-size: 1rem;
-    font-weight: 300;
-    max-width: 480px;
-    margin-bottom: 3.5rem;
-  }
+  .section-title span { color: var(--primary); }
 
-  /* ── ABOUT ── */
-  .about-grid {
+  /* PROJECTS */
+  .projects-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
   }
 
-  .about-visual {
-    position: relative;
-  }
-
-  .about-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .about-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-
-  .about-initials {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 1.6rem;
-    color: #fff;
-    margin-bottom: 1.5rem;
-  }
-
-  .about-card h3 {
-    font-family: var(--font-display);
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 0.25rem;
-  }
-
-  .about-card p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .about-info-row {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    border-top: 1px solid var(--border);
-    font-size: 0.875rem;
-  }
-
-  .about-info-row span:first-child { color: var(--muted); min-width: 80px; }
-
-  .about-text p {
-    color: var(--muted);
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.9;
-    margin-bottom: 1.25rem;
-  }
-
-  .about-text p strong { color: var(--text); font-weight: 500; }
-
-  /* ── SKILLS ── */
-  .skills-bg { background: var(--bg2); }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .skill-card {
-    background: var(--card);
+  .project-card {
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 1.75rem;
-    transition: border-color 0.2s, transform 0.2s;
+    overflow: hidden;
+    transition: all 0.3s;
+    position: relative;
   }
 
-  .skill-card:hover {
-    border-color: rgba(79,110,247,0.3);
-    transform: translateY(-3px);
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255,60,0,0.3);
+    box-shadow: 0 20px 60px rgba(255,60,0,0.08);
   }
 
-  .skill-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+  .project-preview {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
   }
 
-  .icon-blue { background: rgba(79,110,247,0.15); }
-  .icon-purple { background: rgba(167,139,250,0.15); }
-  .icon-green { background: rgba(74,222,128,0.12); }
-
-  .skill-card h4 {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .skill-card p {
-    color: var(--muted);
-    font-size: 0.85rem;
-    font-weight: 300;
-    line-height: 1.6;
-  }
-
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 1rem;
-  }
-
-  .tag {
-    font-size: 0.72rem;
-    padding: 0.25rem 0.65rem;
-    border-radius: 100px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-weight: 400;
-  }
-
-  /* ── WORK / PROJECTS ── */
-  .work-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .work-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2rem;
-    transition: border-color 0.2s, transform 0.2s;
+  .preview-burger {
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+    width: 100%;
+    height: 100%;
     position: relative;
     overflow: hidden;
   }
 
-  .work-card:hover {
-    border-color: rgba(79,110,247,0.3);
-    transform: translateY(-4px);
+  .preview-burger img,
+  .preview-gym img,
+  .preview-shop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    filter: brightness(0.75);
   }
 
-  .work-card.featured {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
+  .project-card:hover .preview-burger img,
+  .project-card:hover .preview-gym img,
+  .project-card:hover .preview-shop img {
+    transform: scale(1.06);
+    filter: brightness(0.9);
   }
 
-  .work-card::after {
+  .preview-burger::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(79,110,247,0.04), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
   }
 
-  .work-card:hover::after { opacity: 1; }
-
-  .work-type {
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-  }
-
-  .work-card h3 {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .work-card p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    font-weight: 300;
-    line-height: 1.7;
-  }
-
-  .work-mockup {
-    background: var(--bg3);
-    border-radius: 12px;
-    padding: 1.5rem;
-    aspect-ratio: 16/10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
+  .preview-gym {
+    background: linear-gradient(135deg, #0d1117 0%, #1a2030 100%);
+    width: 100%;
+    height: 100%;
     position: relative;
     overflow: hidden;
   }
 
-  .mockup-browser {
+  .preview-gym::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .preview-shop {
+    background: linear-gradient(135deg, #0f0f12 0%, #1a1520 100%);
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .browser-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .browser-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-
-  .dot-r { background: #ff5f57; }
-  .dot-y { background: #febc2e; }
-  .dot-g { background: #28c840; }
-
-  .browser-url {
-    flex: 1;
-    background: rgba(255,255,255,0.05);
-    border-radius: 4px;
-    height: 16px;
-    margin: 0 0.5rem;
-  }
-
-  .browser-content {
-    flex: 1;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: 0.4rem;
+    position: relative;
     overflow: hidden;
   }
 
-  .mock-nav-bar { height: 20px; background: rgba(255,255,255,0.04); border-radius: 4px; }
-  .mock-hero { background: linear-gradient(135deg, rgba(79,110,247,0.15), rgba(167,139,250,0.08)); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-  .mock-hero-text { font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; }
-  .mock-footer { height: 16px; background: rgba(255,255,255,0.03); border-radius: 4px; }
-
-  .brand-mockup-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    width: 100%;
-    height: 100%;
+  .preview-shop::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
   }
 
-  .brand-logo-card {
-    background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-weight: 800;
+  .project-tag {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .project-info { padding: 24px; }
+
+  .project-info h3 {
+    font-family: 'Tajawal', sans-serif;
     font-size: 1.2rem;
-    color: #fff;
+    font-weight: 800;
+    margin-bottom: 8px;
   }
 
-  .brand-logo-card.alt {
-    background: linear-gradient(135deg, #f97316, #ec4899);
-    font-size: 1rem;
+  .project-info p {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
   }
 
-  .brand-palette {
+  .project-tech {
     display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
   }
 
-  .palette-row {
-    display: flex;
-    gap: 0.4rem;
-    flex: 1;
+  .tech-pill {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-dim);
   }
 
-  .palette-swatch { flex: 1; border-radius: 6px; }
+  .project-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
 
-  /* ── CERTIFICATIONS ── */
-  .certs-bg { background: var(--bg2); }
+  .project-link:hover { gap: 10px; }
 
-  .certs-grid {
+  /* SERVICES */
+  .services-bg { background: var(--bg2); }
+
+  .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
   }
 
-  .cert-card {
-    background: var(--card);
+  .service-card {
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    transition: border-color 0.2s;
+    padding: 32px 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
   }
 
-  .cert-card:hover { border-color: rgba(79,110,247,0.3); }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(255,60,0,0.1) 0%, transparent 70%);
+    border-radius: 0 14px 0 80px;
+  }
 
-  .cert-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: rgba(79,110,247,0.12);
-    border: 1px solid rgba(79,110,247,0.2);
+  .service-card:hover {
+    border-color: rgba(255,60,0,0.25);
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 52px; height: 52px;
+    background: var(--primary-dim);
+    border: 1px solid rgba(255,60,0,0.2);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-family: 'Tajawal', sans-serif;
     font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .service-card p {
+    color: var(--text-dim);
+    font-size: 0.87rem;
+    line-height: 1.7;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+
+  .skill-item:hover {
+    border-color: rgba(255,60,0,0.3);
+    background: var(--primary-dim);
+    transform: scale(1.05);
+  }
+
+  .skill-icon { font-size: 2rem; margin-bottom: 10px; }
+
+  .skill-name {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-dim);
+  }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 32px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .price-card:hover { transform: translateY(-6px); }
+
+  .price-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  .price-amount {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .price-currency {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 28px;
+    text-align: right;
+  }
+
+  .price-features li {
+    padding: 8px 0;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .price-features li::before {
+    content: '✓';
+    color: var(--primary);
+    font-weight: 900;
     flex-shrink: 0;
   }
 
-  .cert-body h4 {
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 0.25rem;
-    line-height: 1.4;
-  }
+  /* CONTACT */
+  .contact-bg { background: var(--bg2); }
 
-  .cert-body p {
-    color: var(--muted);
-    font-size: 0.78rem;
-    font-weight: 300;
-    margin-bottom: 0.4rem;
-  }
-
-  .cert-year {
-    font-size: 0.72rem;
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  /* ── CONTACT ── */
-  .contact-inner {
-    max-width: 640px;
+  .contact-wrapper {
+    max-width: 600px;
     margin: 0 auto;
     text-align: center;
   }
 
-  .contact-inner .section-title { font-size: clamp(2rem, 5vw, 3.5rem); }
+  .contact-wrapper p {
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+  }
 
-  .contact-links {
+  .contact-btns {
     display: flex;
+    gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2.5rem;
   }
 
-  .contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    color: var(--text);
+  .whatsapp-btn {
+    background: #25D366;
+    color: white;
+    padding: 16px 36px;
+    border-radius: 10px;
     text-decoration: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 100px;
-    font-size: 0.9rem;
-    font-weight: 400;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .contact-link:hover {
-    border-color: rgba(79,110,247,0.4);
-    background: rgba(79,110,247,0.08);
-  }
-
-  .contact-link svg { width: 16px; height: 16px; opacity: 0.7; }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 4rem;
+    font-weight: 700;
+    font-size: 1rem;
     display: flex;
     align-items: center;
+    gap: 10px;
+    transition: all 0.25s;
+  }
+
+  .whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(37,211,102,0.25);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 5%;
+    border-top: 1px solid var(--border);
+    display: flex;
     justify-content: space-between;
-    position: relative;
-    z-index: 1;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   footer p {
-    color: var(--muted);
-    font-size: 0.825rem;
+    color: var(--text-dim);
+    font-size: 0.85rem;
   }
 
-  /* ── ANIMATIONS ── */
-  .fade-in {
+  footer span { color: var(--primary); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition: all 0.6s ease;
   }
 
-  .fade-in.visible {
+  .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 1rem 1.5rem; }
-    nav ul { display: none; }
-    .hero { padding: 7rem 1.5rem 3rem; }
-    section { padding: 4rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .work-grid { grid-template-columns: 1fr; }
-    .work-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
-    .certs-grid { grid-template-columns: 1fr 1fr; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
-    .hero-stats { gap: 1.5rem; }
-  }
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
 
-  @media (max-width: 540px) {
-    .certs-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 2.6rem; }
-    .hero-stats { flex-wrap: wrap; }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .stats-bar { grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .stat-num { font-size: 1.8rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Omar<span>.</span></a>
-  <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#certs">Certs</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  <div class="nav-logo">عمر <span>أحمد</span></div>
+  <ul class="nav-links">
+    <li><a href="#projects">الأعمال</a></li>
+    <li><a href="#services">الخدمات</a></li>
+    <li><a href="#pricing">الأسعار</a></li>
+    <li><a href="#contact">التواصل</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge">Available for freelance</div>
-    <h1>
-      Building the web,<br>
-      <span class="line2">designing the brand.</span>
-    </h1>
-    <p class="hero-desc">
-      Front-End Developer & Graphic Designer based in Alexandria, Egypt.
-      I build responsive websites and create brand identities that leave a mark.
-    </p>
-    <div class="hero-actions">
-      <a href="#work" class="btn-primary">
-        View My Work
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#contact" class="btn-outline">Get in Touch</a>
+    <div class="hero-tag">
+      <span class="dot"></span>
+      متاح للعمل الآن
     </div>
-    <div class="hero-stats">
-      <div>
-        <span class="stat-num">2+</span>
-        <span class="stat-label">Clients Served</span>
-      </div>
-      <div>
-        <span class="stat-num">5+</span>
-        <span class="stat-label">Projects Done</span>
-      </div>
-      <div>
-        <span class="stat-num">5</span>
-        <span class="stat-label">Certifications</span>
-      </div>
+    <h1>
+      مواقع تجذب<br>
+      <span class="accent">العملاء فعلاً</span>
+    </h1>
+    <p>
+      بصمم وأبرمج مواقع احترافية للمحلات والمطاعم والجيمات — تشتغل على كل الأجهزة، بتفاصيل دقيقة، وبسعر مناسب.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">شوف شغلي</a>
+      <a href="#contact" class="btn-outline">تواصل معي</a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid fade-in">
-    <div class="about-visual">
-      <div class="about-card">
-        <div class="about-initials">OA</div>
-        <h3>Omar Ahmed Salem</h3>
-        <p>Front-End Developer & Graphic Designer</p>
-        <div class="about-info-row">
-          <span>Location</span>
-          <span>Alexandria, Egypt</span>
+
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-label">PORTFOLIO</div>
+    <h2 class="section-title">أحدث <span>أعمالي</span></h2>
+  </div>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-preview">
+        <div class="preview-burger">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="Burger Zone" loading="lazy">
         </div>
-        <div class="about-info-row">
-          <span>Email</span>
-          <span style="color: #8ba4fa;">omarsalem6485@gmail.com</span>
+        <span class="project-tag">مطعم</span>
+      </div>
+      <div class="project-info">
+        <h3>Burger Zone</h3>
+        <p>موقع مطعم برجر كامل بمنيو تفاعلي، سلة طلبات، وإرسال أوردر عبر واتساب مباشرة.</p>
+        <div class="project-tech">
+          <span class="tech-pill">HTML</span>
+          <span class="tech-pill">CSS</span>
+          <span class="tech-pill">JavaScript</span>
         </div>
-        <div class="about-info-row">
-          <span>Status</span>
-          <span style="color: #4ade80; display:flex; align-items:center; gap:0.4rem;">
-            <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;animation:pulse 2s infinite;"></span>
-            Available
-          </span>
-        </div>
-        <div class="about-info-row">
-          <span>LinkedIn</span>
-          <a href="https://www.linkedin.com/in/omar-ahmed-b7090a391" target="_blank" style="color:#8ba4fa; font-size:0.85rem;">View Profile →</a>
-        </div>
+        <a href="https://omarsalem6485-tech.github.io/burger-zone/" target="_blank" class="project-link">عرض الموقع ←</a>
       </div>
     </div>
-    <div class="about-text">
-      <div class="section-tag">About Me</div>
-      <h2 class="section-title">I build things for the web.</h2>
-      <p>
-        I'm a <strong>15-year-old front-end developer and graphic designer</strong> from Alexandria — self-taught, strategic, and building fast. I started with HTML and CSS, then pushed into JavaScript, UI design, and brand identity work.
-      </p>
-      <p>
-        I've designed logos for two medical clinics, managed social media content for an ENT doctor's practice, and built responsive website mockups for restaurants and retail businesses.
-      </p>
-      <p>
-        I'm currently in <strong>Level 3 of Ashbal Misr Al-Raqamiya</strong>, Egypt's national digital initiative — and I'm not slowing down. Long-term, I'm moving into cybersecurity and software engineering.
-      </p>
+
+    <div class="project-card reveal">
+      <div class="project-preview">
+        <div class="preview-gym">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="موقع جيم" loading="lazy">
+        </div>
+        <span class="project-tag">جيم</span>
+      </div>
+      <div class="project-info">
+        <h3>موقع جيم</h3>
+        <p>موقع لصالة رياضية يعرض الباقات والخدمات، مع نموذج تسجيل ومعلومات التواصل.</p>
+        <div class="project-tech">
+          <span class="tech-pill">HTML</span>
+          <span class="tech-pill">CSS</span>
+          <span class="tech-pill">JavaScript</span>
+        </div>
+        <a href="#contact" class="project-link">مشروع خاص ←</a>
+      </div>
+    </div>
+
+    <div class="project-card reveal">
+      <div class="project-preview">
+        <div class="preview-shop">
+          <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80" alt="محل ملابس" loading="lazy">
+        </div>
+        <span class="project-tag">ملابس</span>
+      </div>
+      <div class="project-info">
+        <h3>محل ملابس</h3>
+        <p>موقع متجر ملابس يعرض المنتجات بشكل أنيق مع إمكانية الطلب عبر واتساب.</p>
+        <div class="project-tech">
+          <span class="tech-pill">HTML</span>
+          <span class="tech-pill">CSS</span>
+          <span class="tech-pill">JavaScript</span>
+        </div>
+        <a href="#contact" class="project-link">مشروع خاص ←</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-bg">
+  <div class="section-header reveal">
+    <div class="section-label">SERVICES</div>
+    <h2 class="section-title">إيه اللي <span>بقدمه</span></h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🍽️</div>
+      <h3>مواقع المطاعم</h3>
+      <p>منيو إلكتروني، طلب أونلاين عبر واتساب، خريطة الفرع، وتصميم يجذب الزبون.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🛍️</div>
+      <h3>مواقع المحلات</h3>
+      <p>عرض المنتجات، أسعار محدّثة، وصفحة تواصل — كل اللي المحل محتاجه أونلاين.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">💪</div>
+      <h3>مواقع الجيمات</h3>
+      <p>عرض الباقات والأسعار، جداول الحصص، وتسجيل الاشتراكات بشكل احترافي.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📱</div>
+      <h3>تصميم متجاوب</h3>
+      <p>الموقع بيشتغل تمام على الموبايل والتابلت والكمبيوتر — من غير أي مشاكل.</p>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
-<section id="skills" class="skills-bg">
-  <div class="section-tag fade-in">What I Do</div>
-  <h2 class="section-title fade-in">Skills & Tools</h2>
-  <p class="section-sub fade-in">A focused stack built for real delivery — not just learning.</p>
-  <div class="skills-grid fade-in">
-    <div class="skill-card">
-      <div class="skill-icon icon-blue">⟨/⟩</div>
-      <h4>Front-End Development</h4>
-      <p>Building fast, responsive, and clean websites from scratch using modern HTML, CSS, and JavaScript.</p>
-      <div class="skill-tags">
-        <span class="tag">HTML5</span>
-        <span class="tag">CSS3</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">Responsive Design</span>
-        <span class="tag">Git & GitHub</span>
-      </div>
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-label">SKILLS</div>
+    <h2 class="section-title">التقنيات اللي <span>بشتغل بيها</span></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-item reveal">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">HTML5</div>
     </div>
-    <div class="skill-card">
-      <div class="skill-icon icon-purple">✦</div>
-      <h4>Graphic Design</h4>
-      <p>Creating logos, brand identities, and social media visuals that communicate clearly and look sharp.</p>
-      <div class="skill-tags">
-        <span class="tag">Logo Design</span>
-        <span class="tag">Brand Identity</span>
-        <span class="tag">Social Media</span>
-        <span class="tag">Adobe Tools</span>
-      </div>
+    <div class="skill-item reveal">
+      <div class="skill-icon">🎨</div>
+      <div class="skill-name">CSS3</div>
     </div>
-    <div class="skill-card">
-      <div class="skill-icon icon-green">◈</div>
-      <h4>UI / UX Thinking</h4>
-      <p>Designing interfaces with the user in mind — clean layouts, logical flow, and visual hierarchy.</p>
-      <div class="skill-tags">
-        <span class="tag">UI Mockups</span>
-        <span class="tag">Layout Design</span>
-        <span class="tag">Typography</span>
-        <span class="tag">Color Theory</span>
-      </div>
+    <div class="skill-item reveal">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">JavaScript</div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-icon">🐙</div>
+      <div class="skill-name">GitHub</div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-icon">📐</div>
+      <div class="skill-name">Canva</div>
+    </div>
+    <div class="skill-item reveal">
+      <div class="skill-icon">📱</div>
+      <div class="skill-name">Responsive</div>
     </div>
   </div>
 </section>
 
-<!-- WORK -->
-<section id="work">
-  <div class="section-tag fade-in">Portfolio</div>
-  <h2 class="section-title fade-in">Selected Work</h2>
-  <p class="section-sub fade-in">Projects built with real intent — for clients and for growth.</p>
-  <div class="work-grid fade-in">
-
-    <div class="work-card featured">
-      <div>
-        <div class="work-type">Front-End Development</div>
-        <h3>Restaurant Website</h3>
-        <p>
-          A fully responsive multi-page website built for a restaurant concept. Includes a menu layout, contact section, and mobile navigation — structured with HTML5, CSS3 (Flexbox/Grid), and vanilla JavaScript.
-        </p>
-        <div class="skill-tags" style="margin-top:1rem;">
-          <span class="tag">HTML5</span>
-          <span class="tag">CSS3</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">Responsive</span>
-        </div>
-      </div>
-      <div class="work-mockup">
-        <div class="mockup-browser">
-          <div class="browser-bar">
-            <div class="browser-dot dot-r"></div>
-            <div class="browser-dot dot-y"></div>
-            <div class="browser-dot dot-g"></div>
-            <div class="browser-url"></div>
-          </div>
-          <div class="browser-content">
-            <div class="mock-nav-bar"></div>
-            <div class="mock-hero">
-              <span class="mock-hero-text">Restaurant Website</span>
-            </div>
-            <div class="mock-footer"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="work-card">
-      <div class="work-type">Brand Identity</div>
-      <h3>Medical Clinic Logos</h3>
-      <p>
-        Complete brand identity packages for two separate medical clinics — including logo design, color palette, and typography. Delivered in print-ready and digital formats.
-      </p>
-      <div class="skill-tags" style="margin-top:1rem;">
-        <span class="tag">Logo Design</span>
-        <span class="tag">Branding</span>
-        <span class="tag">Print Assets</span>
-      </div>
-    </div>
-
-    <div class="work-card">
-      <div class="work-type">Social Media & Branding</div>
-      <h3>ENT Doctor Practice</h3>
-      <p>
-        Ongoing social media content design and brand management for an ENT doctor's practice — posts, visual identity consistency, and marketing materials.
-      </p>
-      <div class="skill-tags" style="margin-top:1rem;">
-        <span class="tag">Social Media Design</span>
-        <span class="tag">Content Strategy</span>
-        <span class="tag">Brand Consistency</span>
-      </div>
-    </div>
-
+<!-- PRICING -->
+<section id="pricing" class="services-bg">
+  <div class="section-header reveal" style="text-align:center">
+    <div class="section-label">PRICING</div>
+    <h2 class="section-title">أسعار <span>واضحة</span> من الأول</h2>
   </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-<section id="certs" class="certs-bg">
-  <div class="section-tag fade-in">Education</div>
-  <h2 class="section-title fade-in">Certifications & Training</h2>
-  <p class="section-sub fade-in">Certified through national programs and online platforms.</p>
-  <div class="certs-grid fade-in">
-    <div class="cert-card">
-      <div class="cert-icon">⟨/⟩</div>
-      <div class="cert-body">
-        <h4>HTML Fundamentals</h4>
-        <p>Yenfa3 Platform (ينفع)</p>
-        <span class="cert-year">2025 · Certificate</span>
-      </div>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-name">BASIC</div>
+      <div class="price-amount">500</div>
+      <div class="price-currency">جنيه مصري</div>
+      <ul class="price-features">
+        <li>صفحة واحدة</li>
+        <li>تصميم احترافي</li>
+        <li>متجاوب مع الموبايل</li>
+        <li>نموذج تواصل</li>
+      </ul>
+      <a href="#contact" class="btn-outline" style="display:block;text-align:center">ابدأ دلوقتي</a>
     </div>
-    <div class="cert-card">
-      <div class="cert-icon">🎨</div>
-      <div class="cert-body">
-        <h4>CSS Fundamentals</h4>
-        <p>Yenfa3 Platform (ينفع)</p>
-        <span class="cert-year">2025 · Certificate</span>
-      </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-icon">⚡</div>
-      <div class="cert-body">
-        <h4>JavaScript Fundamentals</h4>
-        <p>Yenfa3 Platform (ينفع)</p>
-        <span class="cert-year">2025 · Certificate</span>
-      </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-icon">🇪🇬</div>
-      <div class="cert-body">
-        <h4>Digital Skills — Level 1</h4>
-        <p>Ashbal Misr Al-Raqamiya (أشبال مصر الرقمية)</p>
-        <span class="cert-year">2025 · Certificate</span>
-      </div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-icon">🇪🇬</div>
-      <div class="cert-body">
-        <h4>Digital Skills — Level 2</h4>
-        <p>Ashbal Misr Al-Raqamiya (أشبال مصر الرقمية)</p>
-        <span class="cert-year">2025 · Certificate</span>
-      </div>
-    </div>
-    <div class="cert-card" style="border-color: rgba(79,110,247,0.25); background: rgba(79,110,247,0.05);">
-      <div class="cert-icon" style="background:rgba(79,110,247,0.2);">🔓</div>
-      <div class="cert-body">
-        <h4>Digital Skills — Level 3</h4>
-        <p>Ashbal Misr Al-Raqamiya (أشبال مصر الرقمية)</p>
-        <span class="cert-year" style="color: var(--accent2);">In Progress · 2025</span>
-      </div>
+    <div class="price-card reveal">
+      <div class="price-name">PRO</div>
+      <div class="price-amount">1000</div>
+      <div class="price-currency">جنيه مصري</div>
+      <ul class="price-features">
+        <li>3 صفحات كاملة</li>
+        <li>منيو أو كتالوج</li>
+        <li>طلب عبر واتساب</li>
+        <li>خريطة + موقع</li>
+        <li>تعديل مجاني لمدة شهر</li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="display:block;text-align:center">ابدأ دلوقتي</a>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner fade-in">
-    <div class="section-tag">Let's Talk</div>
-    <h2 class="section-title">Got a project?<br>Let's build it.</h2>
-    <p style="color: var(--muted); font-size: 1rem; font-weight: 300; margin-top: 1rem; line-height: 1.8;">
-      I'm available for freelance work — websites, brand identity, and social media design.
-      Drop me a message and I'll get back to you fast.
-    </p>
-    <div class="contact-links">
-      <a href="mailto:omarsalem6485@gmail.com" class="contact-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-        omarsalem6485@gmail.com
-      </a>
-      <a href="https://www.linkedin.com/in/omar-ahmed-b7090a391" target="_blank" class="contact-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a href="tel:+201090538057" class="contact-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.49 5.49l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
-        +20 109 053 8057
+<section id="contact" class="contact-bg">
+  <div class="contact-wrapper reveal">
+    <div class="section-label" style="margin-bottom:12px">CONTACT</div>
+    <h2 class="section-title" style="margin-bottom:20px">خليني أعمل <span>موقعك</span></h2>
+    <p>عندك محل أو مطعم أو أي نشاط تجاري وعايز موقع احترافي؟ تواصل معي دلوقتي وهنتفق على كل التفاصيل.</p>
+    <div class="contact-btns">
+      <a href="https://wa.me/201090538057?text=مرحباً، أنا مهتم بعمل موقع لنشاطي التجاري" class="whatsapp-btn" target="_blank">
+        💬 تواصل على واتساب
       </a>
     </div>
   </div>
@@ -1031,35 +881,22 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 Omar Ahmed Salem — Alexandria, Egypt</p>
-  <p style="display:flex; align-items:center; gap:0.5rem;">
-    <span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;animation:pulse 2s infinite;"></span>
-    Available for freelance
-  </p>
+  <p>© 2025 <span>عمر أحمد</span> — جميع الحقوق محفوظة</p>
+  <p>مطور مواقع | الإسكندرية، مصر</p>
 </footer>
 
 <script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        const siblings = e.target.parentElement.querySelectorAll('.fade-in');
-        siblings.forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 80);
-        });
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
       }
     });
   }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
+  reveals.forEach(el => observer.observe(el));
 </script>
+
 </body>
 </html>
